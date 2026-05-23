@@ -15,10 +15,11 @@ void euler(vec2 M[RES][RES])
             for (float t = 0; t < t_f; t += dt)
             {
                 vec2 a = accel(pos_x, pos_y); // calcul du tableau accéleration
-                vx = vx + a.x * dt;
-                vy = vy + a.y * dt;
                 pos_x = pos_x + vx * dt;
                 pos_y = pos_y + vy * dt;
+                vx = vx + a.x * dt;
+                vy = vy + a.y * dt;
+
             }
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;

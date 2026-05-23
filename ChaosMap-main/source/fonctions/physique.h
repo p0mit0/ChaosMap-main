@@ -79,7 +79,7 @@ float t_f = 20;
 float e = 0.5;
 float v_0_x = 0;
 float v_0_y = 0;
-float d = 1e-3; 
+float delta = 1e-3; 
 vec2 dist(vec2 pos, Pole pole)
 {
     return {(float)(pos.x - pole.pos.x), (float)(pos.y - pole.pos.y)};
