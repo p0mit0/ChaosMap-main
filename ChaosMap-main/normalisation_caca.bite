@@ -1,0 +1,88 @@
+    std::cout << "initialisation normalisation des données" << std::endl;
+    float min_e;
+    float max_e;
+    min_e = 1e10;
+    max_e = 1e-10;
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+
+            if (Mat_chaos_euler[i][j] < min_e)
+            {
+                min_e = Mat_chaos_euler[i][j];
+            }
+            if (Mat_chaos_euler[i][j] > max_e)
+            {
+                max_e = Mat_chaos_euler[i][j];
+            }
+        }
+    }
+    std::cout << min_e << std::endl;
+    std::cout << max_e << std::endl;
+
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+            Mat_chaos_norm_euler[i][j] = float((Mat_chaos_euler[i][j] - min_e) / (max_e - min_e));
+        }
+    }
+    float min_v;
+    float max_v;
+    min_v = 1e10;
+    max_v = 1e-10;
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+
+            if (Mat_chaos_velo_verlet[i][j] < min_v)
+            {
+                min_v = Mat_chaos_velo_verlet[i][j];
+            }
+            if (Mat_chaos_velo_verlet[i][j] > max_v)
+            {
+                max_v = Mat_chaos_velo_verlet[i][j];
+            }
+        }
+    }
+    std::cout << min_v << std::endl;
+    std::cout << max_v << std::endl;
+
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+            Mat_chaos_norm_velo_verlet[i][j] = float((Mat_chaos_velo_verlet[i][j] - min_v) / (max_e - min_v));
+        }
+    }
+    float min_y;
+    float max_y;
+    min_y = 1e10;
+    max_y = 1e-10;
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+
+            if (Mat_chaos_yoshida[i][j] < min_y)
+            {
+                min_y = Mat_chaos_yoshida[i][j];
+            }
+            if (Mat_chaos_yoshida[i][j] > max_y)
+            {
+                max_y = Mat_chaos_yoshida[i][j];
+            }
+        }
+    }
+    std::cout << min_y << std::endl;
+    std::cout << max_y << std::endl;
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+            Mat_chaos_norm_yoshida[i][j] = float((Mat_chaos_yoshida[i][j] - min_y) / (max_y - min_y));
+        }
+    }
+    std::cout << "fin de la normalisation" << std::endl;

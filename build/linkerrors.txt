@@ -1,0 +1,8 @@
+================================================================================
+Linker Errors
+Generated: 2026-05-23T11:45:17.495Z
+Total Errors: 1
+================================================================================
+
+[LNK1104] (MSVC)
+impossible d'ouvrir le fichier 'D:\Moi\Desktop\travail\Physique L2\C++\ChaosMap-main\build\Release\Chaos.exe' [D:\Moi\Desktop\travail\Physique L2\C++\ChaosMap-main\build\Chaos.vcxproj]

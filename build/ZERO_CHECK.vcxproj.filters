@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="18.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Moi\Desktop\travail\Physique L2\C++\ChaosMap-main\build\CMakeFiles\c3c2efc448ea3fa1fa2b09b21d6df04e\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2A1E2D55-BA3A-38AD-96B2-456A9ED78A93}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
