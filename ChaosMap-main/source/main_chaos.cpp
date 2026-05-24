@@ -6,9 +6,13 @@
 #include "fonctions/euler.h"
 #include "fonctions/verlet.h"
 #include "fonctions/yoshida.h"
+#include <chrono>
+
+using namespace std::chrono;
 
 int main()
 {
+    auto t1 = high_resolution_clock::now();
     std::cout << "Hello world" << std::endl;
 
     for (size_t x = 0; x < RES; x++)
@@ -18,7 +22,7 @@ int main()
             Mat_space[x][y] = vec2{(float)x, (float)y};
         }
     }
-// matrice positions ayant variées
+    // matrice positions ayant variées
     for (size_t x = 0; x < RES; x++)
     {
         for (size_t y = 0; y < RES; y++)
@@ -106,5 +110,8 @@ int main()
     export_csv("chaos_yoshida.csv", Mat_chaos_yoshida);
 
     std::cout << "Export terminé" << std::endl;
-    system("python ../../../ChaosMap-main/ChaosMap-main/chaos_map.py");
+    auto t2 = high_resolution_clock::now();
+    double temps = duration_cast<milliseconds>(t2 - t1).count();
+    std::cout << "Temps de calcul " << temps << "ms" << std::endl;
+    system("python ../ChaosMap-main/chaos_map.py");
 }

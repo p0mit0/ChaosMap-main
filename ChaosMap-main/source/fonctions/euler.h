@@ -19,7 +19,6 @@ void euler(vec2 M[RES][RES])
                 pos_y = pos_y + vy * dt;
                 vx = vx + a.x * dt;
                 vy = vy + a.y * dt;
-
             }
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;

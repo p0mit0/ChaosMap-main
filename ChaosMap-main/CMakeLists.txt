@@ -7,3 +7,4 @@ add_executable(Chaos)
 target_sources(Chaos PUBLIC
     source/main_chaos.cpp)
 target_include_directories(Chaos PUBLIC source/fonctions)
+target_compile_options(Chaos PUBLIC -O3 -march=native -flto)
