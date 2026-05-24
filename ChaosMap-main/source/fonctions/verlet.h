@@ -13,6 +13,11 @@ void velo_verlet(vec2 M[RES][RES])
             vec2 a = accel(pos_x, pos_y);       // initialise le calcul du tableau accéleration
             for (float t = 0; t < t_f; t += dt) // boucle t pour velo verlet
             {
+                if (condition_capture(pos_x, pos_y))
+                {
+                   break; 
+                }
+            
                 vx = vx + a.x * dt * 0.5;
                 vy = vy + a.y * dt * 0.5;
                 pos_x = pos_x + vx * dt;
@@ -21,6 +26,7 @@ void velo_verlet(vec2 M[RES][RES])
                 a = accel(pos_x, pos_y);
                 vx = vx + a.x * dt * 0.5;
                 vy = vy + a.y * dt * 0.5;
+
             }
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;

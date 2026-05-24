@@ -14,6 +14,10 @@ void euler(vec2 M[RES][RES])
             float vy = v_0_y;
             for (float t = 0; t < t_f; t += dt)
             {
+                if (condition_capture(pos_x, pos_y))
+                {
+                   break; 
+                }
                 vec2 a = accel(pos_x, pos_y); // calcul du tableau accéleration
                 pos_x = pos_x + vx * dt;
                 pos_y = pos_y + vy * dt;
@@ -23,6 +27,8 @@ void euler(vec2 M[RES][RES])
             }
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;
+
+           
         }
     }
 }

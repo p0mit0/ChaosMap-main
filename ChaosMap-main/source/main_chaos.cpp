@@ -6,6 +6,7 @@
 #include "fonctions/euler.h"
 #include "fonctions/verlet.h"
 #include "fonctions/yoshida.h"
+#include "fonctions/rk4.h"
 
 int main()
 {
@@ -81,29 +82,58 @@ int main()
     {
         for (size_t j = 0; j < RES; j++)
         {
-            Mat_chaos_yoshida[i][j] = float(norme({(float)(Mat_space_yoshida[i][j].x - Mat_space_var_yoshida[i][j].x), (float)(Mat_space_yoshida[i][j].y - Mat_space_var_yoshida[i][j].y)}));
+            Mat_chaos_yoshida[i][j] = float(norme({(float)(Mat_space_yoshida[i][j].x - Mat_space_var_yoshida[i][j].x), 
+                                                   (float)(Mat_space_yoshida[i][j].y - Mat_space_var_yoshida[i][j].y)}));
         }
     }
-    std::cout << "fin verlet" << std::endl;
-
-    // export 3 fichiers
-    auto export_csv = [&](std::string nom, float matrice[RES][RES])
+    std::cout << "fin yoshida" << std::endl;
+std::cout << "initialisation rk4" << std::endl;
+    // 1. On remplit les matrices RK4 avec la grille de départ
+    for (int i = 0; i < RES; i++)
     {
-        std::ofstream f(nom);
-        for (size_t i = 0; i < RES; i++)
+        for (int j = 0; j < RES; j++)
         {
-            for (size_t j = 0; j < RES; j++)
-            {
-                f << matrice[i][j] << (j < RES - 1 ? "," : "");
-            }
-            f << "\n";
+            Mat_space_rk4[i][j] = Mat_space[i][j];
+            Mat_space_var_rk4[i][j] = Mat_space_var[i][j];
         }
-        f.close();
-    };
+    }
+
+    // 2. On lance l'algorithme ! (C'est ce qu'il manquait)
+    rk4(Mat_space_rk4);
+    rk4(Mat_space_var_rk4);
+
+    std::cout << "fin rk4" << std::endl;
+
+    // 3. On calcule le chaos (un seul bloc suffit)
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+            Mat_chaos_rk4[i][j] = float(norme({
+                Mat_space_rk4[i][j].x - Mat_space_var_rk4[i][j].x,
+                Mat_space_rk4[i][j].y - Mat_space_var_rk4[i][j].y
+            }));
+        }
+    }
+    // export 3 fichiers
+auto export_csv = [&](std::string nom, float matrice[RES][RES])
+{
+    std::ofstream f(nom);
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
+        {
+            f << matrice[i][j] << (j < RES - 1 ? "," : "");
+        }
+        f << "\n";
+    }
+    f.close();
+};
 
     export_csv("chaos_euler.csv", Mat_chaos_euler);
     export_csv("chaos_verlet.csv", Mat_chaos_velo_verlet);
     export_csv("chaos_yoshida.csv", Mat_chaos_yoshida);
+    export_csv("chaos_rk4.csv", Mat_chaos_rk4);
 
     std::cout << "Export terminé" << std::endl;
     system("python ../../../ChaosMap-main/ChaosMap-main/chaos_map.py");

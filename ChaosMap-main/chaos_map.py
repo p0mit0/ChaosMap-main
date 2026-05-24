@@ -6,19 +6,21 @@ try:
     euler = np.loadtxt('chaos_euler.csv', delimiter=',')
     verlet = np.loadtxt('chaos_verlet.csv', delimiter=',')
     yoshida = np.loadtxt('chaos_yoshida.csv', delimiter=',')
+    rk4 = np.loadtxt('chaos_rk4.csv', delimiter=',')
 
-    fig, axs = plt.subplots(1, 3, figsize=(18, 11))
-   
-    # LIGNE DU HAUT : NORMALISÉ (0 à 1)
-    im1=axs[0].imshow(np.sqrt(euler.T + 1e-10), cmap='inferno', origin='lower')
-    axs[0].set_title("Euler")
-   
-    im2=axs[1].imshow(np.sqrt(verlet.T + 1e-10), cmap='inferno', origin='lower')
-    axs[1].set_title("Verlet")
+    fig, axs = plt.subplots(2, 2, figsize=(14, 14))  # grille 2x2
 
-    im3=axs[2].imshow(np.sqrt(yoshida.T + 1e-10), cmap='inferno', origin='lower')
-    axs[2].set_title("Yoshida")
+    axs[0][0].imshow(np.sqrt(euler.T + 1e-10), cmap='jet', origin='lower')
+    axs[0][0].set_title("Euler")
 
+    axs[0][1].imshow(np.sqrt(verlet.T + 1e-10), cmap='jet', origin='lower')
+    axs[0][1].set_title("Verlet")
+
+    axs[1][0].imshow(np.sqrt(yoshida.T + 1e-10), cmap='jet', origin='lower')
+    axs[1][0].set_title("Yoshida")
+
+    axs[1][1].imshow(np.sqrt(rk4.T + 1e-10), cmap='jet', origin='lower')
+    axs[1][1].set_title("RK4")
     
     plt.tight_layout()
     plt.show()

@@ -68,18 +68,23 @@ vec2 Mat_space_velo_verlet[RES][RES];     // matrice après leapfrog
 vec2 Mat_space_var_velo_verlet[RES][RES]; // matrice +d après leapfrog
 vec2 Mat_space_yoshida[RES][RES];
 vec2 Mat_space_var_yoshida[RES][RES];
+vec2 Mat_space_rk4[RES][RES];
+vec2 Mat_space_var_rk4[RES][RES];
 float Mat_chaos_euler[RES][RES];            // création de la matrice contenant le chaos (méthode euler)
 float Mat_chaos_norm_euler[RES][RES];       // matrice contenant le chaos normée (méthode euler)
 float Mat_chaos_velo_verlet[RES][RES];      // création de la matrice contenant le chaos (méthode verlet)
 float Mat_chaos_norm_velo_verlet[RES][RES]; // matrice contenant le chaos normée (méthode verlet)
 float Mat_chaos_yoshida[RES][RES];
 float Mat_chaos_norm_yoshida[RES][RES];
+float Mat_chaos_rk4[RES][RES];
+float Mat_chaos_norm_rk4[RES][RES];
 float dt = 1e-2; // initialisation, constantes
 float t_f = 20;
 float e = 0.5;
 float v_0_x = 0;
 float v_0_y = 0;
-float delta = 1e-3; 
+float delta = 1e-3;
+float r_capture=2;
 vec2 dist(vec2 pos, Pole pole)
 {
     return {(float)(pos.x - pole.pos.x), (float)(pos.y - pole.pos.y)};
@@ -100,9 +105,24 @@ vec2 accel(float pos_x, float pos_y)
     for (size_t p = 0; p < liste_poles.size(); p++)
     {
         vec2 d = dist({pos_x, pos_y}, liste_poles[p]);
-        ax += (liste_poles[p].k / (r_cube(norme(d))+e) * (liste_poles[p].pos.x - pos_x)) / m;
-        ay += (liste_poles[p].k / (r_cube(norme(d))+e) * (liste_poles[p].pos.y - pos_y)) / m;
+        ax += (liste_poles[p].k / (r_cube(norme(d))) * (liste_poles[p].pos.x - pos_x)) / m;
+        ay += (liste_poles[p].k / (r_cube(norme(d))) * (liste_poles[p].pos.y - pos_y)) / m;
     }
     return {ax, ay};
 }
+bool condition_capture (float &x, float &y)
+{
+    for (size_t i=0; i < liste_poles.size(); i++)
+    {
+     vec2 d = dist({x, y}, liste_poles[i]);
 
+        if ( norme(d) <=r_capture ) 
+        {
+            x=liste_poles[i].pos.x;
+            y=liste_poles[i].pos.y; 
+            return true;
+        } 
+
+    }
+    return false;
+}

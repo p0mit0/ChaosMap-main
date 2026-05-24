@@ -24,6 +24,10 @@ void yoshida(vec2 M[RES][RES])
             vec2 a;
             for (float t = 0; t < t_f; t += dt)
             {
+                if (condition_capture(pos_x, pos_y))
+                {
+                   break; 
+                }
                 pos_x += c1 * vx * dt;
                 pos_y += c1 * vy * dt;
                 a = accel(pos_x, pos_y);
@@ -49,6 +53,7 @@ void yoshida(vec2 M[RES][RES])
 
 
             }
+        
 
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;
