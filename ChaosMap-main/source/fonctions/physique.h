@@ -33,31 +33,28 @@ struct Pole
 // tableau de pôles
 std::vector<Pole> liste_poles =
     {
-              
-    // anneau extérieur (8 pôles)
-    {{100, 175}, 100},
-    {{149, 161}, 100},
-    {{175, 125}, 100},
-    {{161, 76},  100},
-    {{125, 50},  100},
-    {{76,  50},  100},
-    {{40,  76},  100},
-    {{26,  125}, 100},
-    // anneau moyen (7 pôles)
-    {{100, 145}, 80},
-    {{133, 134}, 80},
-    {{145, 100}, 80},
-    {{133, 66},  80},
-    {{100, 55},  80},
-    {{67,  66},  80},
-    {{55,  100}, 80},
-    // centre (5 pôles)
-    {{100, 120}, 60},
-    {{115, 110}, 60},
-    {{110, 93},  60},
-    {{90,  90},  60},
-    {{85,  110}, 60}};
 
+ 
+       {{35, 120}, 85}, 
+    {{160, 45}, 110}, 
+    {{95, 180}, 60}, 
+    {{110, 25}, 90},
+    {{50, 150}, 75}, 
+    {{140, 130}, 105}, 
+    {{70, 70}, 95}, 
+    {{125, 165}, 80},
+    {{20, 80}, 120}, 
+    {{175, 100}, 70}, 
+    {{85, 40}, 100}, 
+    {{150, 85}, 65},
+    {{60, 110}, 115}, 
+    {{105, 145}, 55}, 
+    {{45, 35}, 105}, 
+    {{130, 50}, 85},
+    {{80, 160}, 90}, 
+    {{165, 155}, 75}, 
+    {{25, 170}, 100}, 
+    {{180, 20}, 80}};
 
 const int RES = 201;
 vec2 Mat_space[RES][RES];                 // création de la matrice de vecteurs positions
@@ -78,13 +75,13 @@ float Mat_chaos_yoshida[RES][RES];
 float Mat_chaos_norm_yoshida[RES][RES];
 float Mat_chaos_rk4[RES][RES];
 float Mat_chaos_norm_rk4[RES][RES];
-float dt = 1e-2; // initialisation, constantes
-float t_f = 20;
-float e = 0.5;
-float v_0_x = 0;
-float v_0_y = 0;
+float dt = 1e-3; // initialisation, constantes
+float t_f = 50;
+float m = 1;
+float v_0_x = 3;
+float v_0_y = 3;
 float delta = 1e-3;
-float r_capture=2;
+float r_capture = 2;
 vec2 dist(vec2 pos, Pole pole)
 {
     return {(float)(pos.x - pole.pos.x), (float)(pos.y - pole.pos.y)};
@@ -96,7 +93,7 @@ float r_cube(float r)
 }
 
 // fonction accel pour pole dans liste_pole:
-float m = 1;
+
 vec2 accel(float pos_x, float pos_y)
 {
     float ax = 0;
@@ -110,19 +107,18 @@ vec2 accel(float pos_x, float pos_y)
     }
     return {ax, ay};
 }
-bool condition_capture (float &x, float &y)
+bool condition_capture(float &x, float &y)
 {
-    for (size_t i=0; i < liste_poles.size(); i++)
+    for (size_t i = 0; i < liste_poles.size(); i++)
     {
-     vec2 d = dist({x, y}, liste_poles[i]);
+        vec2 d = dist({x, y}, liste_poles[i]);
 
-        if ( norme(d) <=r_capture ) 
+        if (norme(d) <= r_capture)
         {
-            x=liste_poles[i].pos.x;
-            y=liste_poles[i].pos.y; 
+            x = liste_poles[i].pos.x;
+            y = liste_poles[i].pos.y;
             return true;
-        } 
-
+        }
     }
     return false;
 }

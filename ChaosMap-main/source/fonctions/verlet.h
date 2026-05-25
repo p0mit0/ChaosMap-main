@@ -15,9 +15,9 @@ void velo_verlet(vec2 M[RES][RES])
             {
                 if (condition_capture(pos_x, pos_y))
                 {
-                   break; 
+                    break;
                 }
-            
+
                 vx = vx + a.x * dt * 0.5;
                 vy = vy + a.y * dt * 0.5;
                 pos_x = pos_x + vx * dt;
@@ -26,7 +26,6 @@ void velo_verlet(vec2 M[RES][RES])
                 a = accel(pos_x, pos_y);
                 vx = vx + a.x * dt * 0.5;
                 vy = vy + a.y * dt * 0.5;
-
             }
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;
