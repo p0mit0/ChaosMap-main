@@ -13,7 +13,7 @@ void yoshida(vec2 M[RES][RES])
     const float d1 = w1;
     const float d2 = w0;
     const float d3 = w1;
-
+    std::ofstream trace("trajectoire.csv");
     for (size_t i = 0; i < RES; i++)
     {
         for (size_t j = 0; j < RES; j++)
@@ -54,12 +54,14 @@ void yoshida(vec2 M[RES][RES])
                 pos_x += c4 * vx * dt;
                 pos_y += c4 * vy * dt;
 
-
             }
         
 
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;
         }
+
     }
+
 }
+

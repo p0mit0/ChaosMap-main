@@ -56,7 +56,7 @@ int main()
     velo_verlet(Mat_space_velo_verlet);
     velo_verlet(Mat_space_var_velo_verlet);
     // on rempli mat yoshida avec matspace et matspace var
-    std::cout << "fin yoshida" << std::endl;
+    std::cout << "fin verlet" << std::endl;
     std::cout << "initialisation yoshida" << std::endl;
     for (int i = 0; i < RES; i++)
     {
@@ -79,11 +79,12 @@ int main()
             Mat_space_rk4[i][j] = Mat_space[i][j];
             Mat_space_var_rk4[i][j] = Mat_space_var[i][j];
         }
+    }
         // on fait rk4 sur les matrices
         rk4(Mat_space_rk4);
         rk4(Mat_space_var_rk4);
-
-        // On calcul le chaos pour chacune de matrices possible d'en faire une fonction
+std::cout << "initialisation calcul chaos" << std::endl;
+    // On calcul le chaos pour chacune de matrices possible d'en faire une fonction
         for (size_t i = 0; i < RES; i++)
         {
             for (size_t j = 0; j < RES; j++)
@@ -151,4 +152,3 @@ int main()
         std::cout << "fin export" << std::endl;
         system("python ../../../ChaosMap-main/ChaosMap-main/chaos_map.py");
     }
-}

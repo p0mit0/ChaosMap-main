@@ -32,7 +32,6 @@
 #    print(f"Erreur : {e}")
 import numpy as np
 import matplotlib.pyplot as plt
-
 def affiche_contraste(ax, data, titre):
     # On applique ta transformation (racine carrée) et on transpose
     data_transformee = np.sqrt(data.T + 1e-10)

@@ -70,13 +70,13 @@ vec2 Mat_space_var_rk4[RES][RES];         // matrice positions +delta de rk4
 float Mat_chaos_euler[RES][RES];          // création de la matrice contenant le chaos (méthode euler)
 // float Mat_chaos_norm_euler[RES][RES];       // matrice contenant le chaos normée (méthode euler)
 float Mat_chaos_velo_verlet[RES][RES]; // création de la matrice contenant le chaos (méthode verlet)
-                                       // float Mat_chaos_norm_velo_verlet[RES][RES]; // matrice contenant le chaos normée (méthode verlet)
+// float Mat_chaos_norm_velo_verlet[RES][RES]; // matrice contenant le chaos normée (méthode verlet)
 float Mat_chaos_yoshida[RES][RES];     // création de la matrice contenant le chaos (méthode euler)
-                                       // float Mat_chaos_norm_yoshida[RES][RES];// création de la matrice contenant le chaos (méthode euler)
+// float Mat_chaos_norm_yoshida[RES][RES];// création de la matrice contenant le chaos (méthode euler)
 float Mat_chaos_rk4[RES][RES];         // création de la matrice contenant le chaos (méthode euler)
 // float Mat_chaos_norm_rk4[RES][RES];// création de la matrice contenant le chaos (méthode euler)
-float dt = 1e-3;               // initialisation, constantes
-float t_f = 50;                // temps final
+float dt = 1e-2;               // initialisation, constantes
+float t_f = 20;                // temps final
 float m = 1;                   // masse de l'objet
 float v_0_x = 3;               // vitesse initiale selon x
 float v_0_y = 3;               // vitesse initiale selon y
