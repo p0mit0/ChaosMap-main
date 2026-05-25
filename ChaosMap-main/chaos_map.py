@@ -11,7 +11,7 @@
 #    yoshida = np.loadtxt('chaos_yoshida.csv', delimiter=',')
 #    rk4 = np.loadtxt('chaos_rk4.csv', delimiter=',')
 
-#    fig, axs = plt.subplots(2, 2, figsize=(14, 14))  # grille 2x2
+#    fig, axs = plt.subplots(2, 2, figsize=(14, 14), sharex=True, sharey=True)  # grille 2x2
 
 #    axs[0][0].imshow(np.sqrt(euler.T + 1e-10), cmap='jet', origin='lower')
 #    axs[0][0].set_title("Euler")
@@ -52,7 +52,7 @@ try:
     yoshida = np.loadtxt('chaos_yoshida.csv', delimiter=',')
     rk4 = np.loadtxt('chaos_rk4.csv', delimiter=',')
 
-    fig, axs = plt.subplots(2, 2, figsize=(14, 14))  # grille 2x2
+    fig, axs = plt.subplots(2, 2, figsize=(14, 14), sharex=True, sharey=True)  # grille 2x2
 
     # Utilisation de la nouvelle fonction pour chaque carte
     affiche_contraste(axs[0][0], euler, "Euler")
