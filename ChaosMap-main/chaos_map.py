@@ -1,3 +1,6 @@
+#deux code python un à mettre en commentaire et l'autre non si on souhaite avoir les valeurs extremes ou non, par défaut pas de valeurs extremes
+
+
 # import numpy as np
 # import matplotlib.pyplot as plt
 

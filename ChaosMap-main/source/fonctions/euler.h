@@ -14,7 +14,7 @@ void euler(vec2 M[RES][RES])
             float vy = v_0_y;
             for (float t = 0; t < t_f; t += dt)
             {
-                if (condition_capture(pos_x, pos_y))
+                if (condition_capture(pos_x, pos_y)) // condition de capture toujours avant premier calcul pour éviter division par 0
                 {
                     break;
                 }

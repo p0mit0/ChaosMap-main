@@ -1,3 +1,5 @@
+
+// normalisation, marche mais non convaincant
 // #pragma once
 // #include "physique.h"
 // void normalisation(float chaos[RES][RES], float chaos_norm[RES][RES])

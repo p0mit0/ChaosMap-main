@@ -3,6 +3,7 @@
 
 void yoshida(vec2 M[RES][RES])
 {
+    //coeffs yoshida, mettre "f" afin de confirmer float
     const float w1 = 1.3512071917951f;
     const float w0 = -1.7024143835903;
     const float c1 = w1 / 2.0f;
@@ -28,26 +29,28 @@ void yoshida(vec2 M[RES][RES])
                 {
                    break; 
                 }
+                //1
                 pos_x += c1 * vx * dt;
                 pos_y += c1 * vy * dt;
+
                 a = accel(pos_x, pos_y);
                 vx += d1 * a.x * dt;
                 vy += d1 * a.y * dt;
-
+                //2
                 pos_x += c2 * vx * dt;
                 pos_y += c2 * vy * dt;
-
+    
                 a = accel(pos_x, pos_y);
                 vx += d2 * a.x * dt;
                 vy += d2 * a.y * dt;
-
+                //3
                 pos_x += c3 * vx * dt;
                 pos_y += c3 * vy * dt;
 
                 a = accel(pos_x, pos_y);
                 vx += d3 * a.x * dt;
                 vy += d3 * a.y * dt;
-
+                
                 pos_x += c4 * vx * dt;
                 pos_y += c4 * vy * dt;
 
