@@ -25,7 +25,7 @@ int main()
     {
         for (size_t y = 0; y < RES; y++)
         {
-            Mat_space_var[x][y] = vec2{x + delta, y - delta};
+            Mat_space_var[x][y] = vec2{x + delta, y + delta};
         }
     }
     // on rempli mat euler avec matspace et matspace var
@@ -132,5 +132,5 @@ int main()
     // export_csv("chaos_norm_rk4.csv", Mat_chaos_norm_rk4);
 
     std::cout << "fin export" << std::endl;
-    system("python ../chaos_map.py");
+    system("python ../../chaos_map.py");
 }

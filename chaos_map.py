@@ -28,8 +28,6 @@
 #    plt.tight_layout()
 #    plt.show()
 
-# except Exception as e:
-#    print(f"Erreur : {e}")
 import numpy as np
 import matplotlib.pyplot as plt
 def curtail(ax, data, titre):
@@ -54,6 +52,11 @@ curtail(axs[0][0], euler, "Euler")
 curtail(axs[0][1], verlet, "Verlet")
 curtail(axs[1][0], yoshida, "Yoshida")
 curtail(axs[1][1], rk4, "RK4")
-    
+mappable = axs[1][1].images[0] 
+
+plt.colorbar(mappable, ax=axs.ravel().tolist(), 
+             fraction=0.046,
+             pad=0.04)
+
 plt.tight_layout()
 plt.show()

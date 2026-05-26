@@ -34,26 +34,17 @@ struct Pole
 std::vector<Pole> liste_poles =
     {
 
-        {{35, 120}, 85},
-        {{160, 45}, 110},
-        {{95, 180}, 60},
-        {{110, 25}, 90},
-        {{50, 150}, 75},
-        {{140, 130}, 105},
-        {{70, 70}, 95},
-        {{125, 165}, 80},
-        {{20, 80}, 120},
-        {{175, 100}, 70},
-        {{85, 40}, 100},
-        {{150, 85}, 65},
-        {{60, 110}, 115},
-        {{105, 145}, 55},
-        {{45, 35}, 105},
-        {{130, 50}, 85},
-        {{80, 160}, 90},
-        {{165, 155}, 75},
-        {{25, 170}, 100},
-        {{180, 20}, 80}};
+ {{35, 120}, 85},   {{160, 45}, 110},  {{95, 180}, 60},   {{110, 25}, 90},
+    {{50, 150}, 75},   {{140, 130}, 105}, {{70, 70}, 95},    {{125, 165}, 80},
+    {{20, 80}, 120},   {{175, 100}, 70},  {{85, 40}, 100},   {{150, 85}, 65},
+    {{60, 110}, 115},  {{105, 145}, 55},  {{45, 35}, 105},   {{130, 50}, 85},
+    {{80, 160}, 90},   {{165, 155}, 75},  {{25, 170}, 100},  {{180, 20}, 80},
+    {{10, 10}, 50},    {{190, 190}, 95},  {{40, 190}, 70},   {{150, 20}, 120},
+    {{120, 120}, 60},  {{30, 40}, 110},   {{170, 70}, 85},   {{90, 90}, 100},
+    {{100, 100}, 75},  {{15, 150}, 90},   {{140, 10}, 105},  {{65, 130}, 80},
+    {{185, 140}, 65},  {{55, 60}, 95},    {{115, 80}, 70},   {{10, 180}, 125},
+    {{195, 30}, 55},   {{75, 20}, 110},   {{135, 170}, 90},  {{20, 100}, 80}
+    };
 
 const int RES = 201;                      // taille de l'espace, malheureusement je n'ai pas eu le temps de modifier afin que cela augmente la résolution plutot que
                                           // agrandir l'espace
@@ -78,8 +69,8 @@ double Mat_chaos_rk4[RES][RES]; // création de la matrice contenant le chaos (m
 double dt = 1e-1;              // initialisation, constantes
 double t_f = 20;               // temps final
 double m = 1;                  // masse de l'objet
-double v_0_x = 3;              // vitesse initiale selon x
-double v_0_y = 3;              // vitesse initiale selon y
+double v_0_x = 0;              // vitesse initiale selon x
+double v_0_y = 0;              // vitesse initiale selon y
 double delta = 1e-3;           // décalage entre position initiale et finale
 double r_capture = 2;          // rayon a partir du quel on considère une particule comme capturée par le pôle
 vec2 dist(vec2 pos, Pole pole) //  fonction calcul distance
