@@ -25,7 +25,7 @@ int main()
     {
         for (size_t y = 0; y < RES; y++)
         {
-            Mat_space_var[x][y] = vec2{x + delta, y + delta};
+            Mat_space_var[x][y] = vec2{x - delta, y + delta};
         }
     }
     // on rempli mat euler avec matspace et matspace var
