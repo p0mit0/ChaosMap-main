@@ -80,7 +80,7 @@ float t_f = 20;                // temps final
 float m = 1;                   // masse de l'objet
 float v_0_x = 3;               // vitesse initiale selon x
 float v_0_y = 3;               // vitesse initiale selon y
-float delta = 1e-3;            // décalage entre position initiale et finale
+float delta = 1e-4;            // décalage entre position initiale et finale
 float r_capture = 2;           // rayon a partir du quel on considère une particule comme capturée par le pôle
 vec2 dist(vec2 pos, Pole pole) //  fonction calcul distance
 {

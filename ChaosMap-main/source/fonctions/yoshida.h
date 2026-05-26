@@ -5,7 +5,7 @@ void yoshida(vec2 M[RES][RES])
 {
     //coeffs yoshida, mettre "f" afin de confirmer float
     const float w1 = 1.3512071917951f;
-    const float w0 = -1.7024143835903;
+    const float w0 = -1.7024143835903f;
     const float c1 = w1 / 2.0f;
     const float c2 = (w1 + w0) / 2.0f;
     const float c3 = c2;
