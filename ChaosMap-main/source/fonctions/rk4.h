@@ -18,8 +18,8 @@ void rk4(vec2 M[RES][RES])
 
                 // k1 
                 vec2 a1 = accel(px, py);
-                float k1_x = vx, k1_y = vy;       // dx/dt = v
-                float k1_vx = a1.x, k1_vy = a1.y; // dv/dt = a
+                float k1_x = vx, k1_y = vy;       // vitesse initiale
+                float k1_vx = a1.x, k1_vy = a1.y; // accel initiale
 
                 // k2  en utilisant k1
                 vec2 a2 = accel(px + k1_x * dt / 2, py + k1_y * dt / 2);
@@ -36,7 +36,7 @@ void rk4(vec2 M[RES][RES])
                 float k4_x = vx + k3_vx * dt, k4_y = vy + k3_vy * dt;
                 float k4_vx = a4.x, k4_vy = a4.y;
 
-                //m.a.j des positions et vitesses
+                //m.a.j des positions et vitesses formule : (1/6 * k1) + (2/6 * k2) + (2/6 * k3) + (1/6 * k4)
                 px += dt / 6.0f * (k1_x + 2 * k2_x + 2 * k3_x + k4_x);
                 py += dt / 6.0f * (k1_y + 2 * k2_y + 2 * k3_y + k4_y);
                 vx += dt / 6.0f * (k1_vx + 2 * k2_vx + 2 * k3_vx + k4_vx);

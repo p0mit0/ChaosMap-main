@@ -18,14 +18,14 @@ void velo_verlet(vec2 M[RES][RES])
                     break;
                 }
 
-                vx = vx + a.x * dt * 0.5;
-                vy = vy + a.y * dt * 0.5;
-                pos_x = pos_x + vx * dt;
-                pos_y = pos_y + vy * dt;
+                vx += a.x * dt * 0.5;
+                vy +=  a.y * dt * 0.5;
+                pos_x +=  vx * dt;
+                pos_y +=  vy * dt;
 
                 a = accel(pos_x, pos_y);
-                vx = vx + a.x * dt * 0.5;
-                vy = vy + a.y * dt * 0.5;
+                vx +=  a.x * dt * 0.5;
+                vy +=  a.y * dt * 0.5;
             }
             M[i][j].x = pos_x;
             M[i][j].y = pos_y;
