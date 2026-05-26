@@ -117,7 +117,7 @@ std::cout << "initialisation calcul chaos" << std::endl;
                                                    Mat_space_rk4[i][j].y - Mat_space_var_rk4[i][j].y}));
             }
         }
-        // ancienne matrices de normalisation non gardées :
+        // ancienne matrices de normalisation non gardées, voir fonctions normalisation:
         // std::cout << "normalisation" << std::endl;
         // normalisation(Mat_chaos_euler,Mat_chaos_norm_euler);
         // normalisation(Mat_chaos_velo_verlet,Mat_chaos_norm_velo_verlet);
