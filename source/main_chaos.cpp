@@ -17,7 +17,7 @@ int main()
     {
         for (size_t y = 0; y < RES; y++)
         {
-            Mat_space[x][y] = vec2{(float)x, (float)y};
+            Mat_space[x][y] = vec2{(double)x, (double)y};
         }
     }
     // matrice positions initales ayant variées de delta
@@ -25,7 +25,7 @@ int main()
     {
         for (size_t y = 0; y < RES; y++)
         {
-            Mat_space_var[x][y] = vec2{x - delta, y + delta};
+            Mat_space_var[x][y] = vec2{x + delta, y - delta};
         }
     }
     // on rempli mat euler avec matspace et matspace var
@@ -80,75 +80,57 @@ int main()
             Mat_space_var_rk4[i][j] = Mat_space_var[i][j];
         }
     }
-        // on fait rk4 sur les matrices
-        rk4(Mat_space_rk4);
-        rk4(Mat_space_var_rk4);
-std::cout << "initialisation calcul chaos" << std::endl;
+    // on fait rk4 sur les matrices
+    rk4(Mat_space_rk4);
+    rk4(Mat_space_var_rk4);
+    std::cout << "initialisation calcul chaos" << std::endl;
     // On calcul le chaos pour chacune de matrices possible d'en faire une fonction
-        for (size_t i = 0; i < RES; i++)
+    for (size_t i = 0; i < RES; i++)
+    {
+        for (size_t j = 0; j < RES; j++)
         {
-            for (size_t j = 0; j < RES; j++)
-            {
-                Mat_chaos_euler[i][j] = float(norme({(float)(Mat_space_euler[i][j].x - Mat_space_var_euler[i][j].x),
-                                                     (float)(Mat_space_euler[i][j].y - Mat_space_var_euler[i][j].y)}));
-            }
+            Mat_chaos_euler[i][j] = (norme({(Mat_space_euler[i][j].x - Mat_space_var_euler[i][j].x),
+                                            (Mat_space_euler[i][j].y - Mat_space_var_euler[i][j].y)}));
+            Mat_chaos_velo_verlet[i][j] = (norme({(Mat_space_velo_verlet[i][j].x - Mat_space_var_velo_verlet[i][j].x),
+                                                  (Mat_space_velo_verlet[i][j].y - Mat_space_var_velo_verlet[i][j].y)}));
+            Mat_chaos_yoshida[i][j] = (norme({(Mat_space_yoshida[i][j].x - Mat_space_var_yoshida[i][j].x),
+                                              (Mat_space_yoshida[i][j].y - Mat_space_var_yoshida[i][j].y)}));
+            Mat_chaos_rk4[i][j] = (norme({Mat_space_rk4[i][j].x - Mat_space_var_rk4[i][j].x,
+                                          Mat_space_rk4[i][j].y - Mat_space_var_rk4[i][j].y}));
         }
-        for (size_t i = 0; i < RES; i++)
-        {
-            for (size_t j = 0; j < RES; j++)
-            {
-                Mat_chaos_velo_verlet[i][j] = float(norme({(float)(Mat_space_velo_verlet[i][j].x - Mat_space_var_velo_verlet[i][j].x),
-                                                            (float)(Mat_space_velo_verlet[i][j].y - Mat_space_var_velo_verlet[i][j].y)}));
-            }
-        }
-        for (size_t i = 0; i < RES; i++)
-        {
-            for (size_t j = 0; j < RES; j++)
-            {
-                Mat_chaos_yoshida[i][j] = float(norme({(float)(Mat_space_yoshida[i][j].x - Mat_space_var_yoshida[i][j].x),
-                                                       (float)(Mat_space_yoshida[i][j].y - Mat_space_var_yoshida[i][j].y)}));
-            }
-        }
-        for (size_t i = 0; i < RES; i++)
-        {
-            for (size_t j = 0; j < RES; j++)
-            {
-                Mat_chaos_rk4[i][j] = float(norme({Mat_space_rk4[i][j].x - Mat_space_var_rk4[i][j].x,
-                                                   Mat_space_rk4[i][j].y - Mat_space_var_rk4[i][j].y}));
-            }
-        }
-        // ancienne matrices de normalisation non gardées, voir fonctions normalisation:
-        // std::cout << "normalisation" << std::endl;
-        // normalisation(Mat_chaos_euler,Mat_chaos_norm_euler);
-        // normalisation(Mat_chaos_velo_verlet,Mat_chaos_norm_velo_verlet);
-        // normalisation(Mat_chaos_yoshida,Mat_chaos_norm_yoshida);
-        // normalisation(Mat_chaos_rk4,Mat_chaos_norm_rk4);
-        // std::cout << "fin normalisation" << std::endl;
-        // export 3 fichiers
-        auto export_csv = [&](std::string nom, float matrice[RES][RES])
-        {
-            std::ofstream f(nom);
-            for (size_t i = 0; i < RES; i++)
-            {
-                for (size_t j = 0; j < RES; j++)
-                {
-                    f << matrice[i][j] << (j < RES - 1 ? "," : "");
-                }
-                f << "\n";
-            }
-            f.close();
-        };
-
-        export_csv("chaos_euler.csv", Mat_chaos_euler);
-        export_csv("chaos_verlet.csv", Mat_chaos_velo_verlet);
-        export_csv("chaos_yoshida.csv", Mat_chaos_yoshida);
-        export_csv("chaos_rk4.csv", Mat_chaos_rk4);
-        // ancien export des matrices normalisées
-        // export_csv("chaos_norm_euler.csv", Mat_chaos_norm_euler);
-        // export_csv("chaos_norm_verlet.csv", Mat_chaos_norm_velo_verlet);
-        // export_csv("chaos_norm_yoshida.csv", Mat_chaos_norm_yoshida);
-        // export_csv("chaos_norm_rk4.csv", Mat_chaos_norm_rk4);
-
-        std::cout << "fin export" << std::endl;
-        system("python ../../../ChaosMap-main/ChaosMap-main/chaos_map.py");
     }
+    // ancienne matrices de normalisation non gardées, voir fonctions normalisation:
+    // std::cout << "normalisation" << std::endl;
+    // normalisation(Mat_chaos_euler,Mat_chaos_norm_euler);
+    // normalisation(Mat_chaos_velo_verlet,Mat_chaos_norm_velo_verlet);
+    // normalisation(Mat_chaos_yoshida,Mat_chaos_norm_yoshida);
+    // normalisation(Mat_chaos_rk4,Mat_chaos_norm_rk4);
+    // std::cout << "fin normalisation" << std::endl;
+    // export 3 fichiers
+    auto export_csv = [&](std::string nom, double matrice[RES][RES])
+    {
+        std::ofstream f(nom);
+        for (size_t i = 0; i < RES; i++)
+        {
+            for (size_t j = 0; j < RES; j++)
+            {
+                f << matrice[i][j] << (j < RES - 1 ? "," : "");
+            }
+            f << "\n";
+        }
+        f.close();
+    };
+
+    export_csv("chaos_euler.csv", Mat_chaos_euler);
+    export_csv("chaos_verlet.csv", Mat_chaos_velo_verlet);
+    export_csv("chaos_yoshida.csv", Mat_chaos_yoshida);
+    export_csv("chaos_rk4.csv", Mat_chaos_rk4);
+    // ancien export des matrices normalisées
+    // export_csv("chaos_norm_euler.csv", Mat_chaos_norm_euler);
+    // export_csv("chaos_norm_verlet.csv", Mat_chaos_norm_velo_verlet);
+    // export_csv("chaos_norm_yoshida.csv", Mat_chaos_norm_yoshida);
+    // export_csv("chaos_norm_rk4.csv", Mat_chaos_norm_rk4);
+
+    std::cout << "fin export" << std::endl;
+    system("python ../chaos_map.py");
+}

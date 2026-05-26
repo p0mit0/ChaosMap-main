@@ -41,22 +41,19 @@ def curtail(ax, data, titre):
     # vmin et vmax
     ax.imshow(data_transformee, cmap='jet', origin='lower', vmin=vmin, vmax=vmax)
     ax.set_title(titre)
-try:
-    # charge fichiers
-    euler = np.loadtxt('chaos_euler.csv', delimiter=',')
-    verlet = np.loadtxt('chaos_verlet.csv', delimiter=',')
-    yoshida = np.loadtxt('chaos_yoshida.csv', delimiter=',')
-    rk4 = np.loadtxt('chaos_rk4.csv', delimiter=',')
 
-    fig, axs = plt.subplots(2, 2, figsize=(14, 14), sharex=True, sharey=True) 
-    # curtail pour tronquer les valeurs extremes
-    curtail(axs[0][0], euler, "Euler")
-    curtail(axs[0][1], verlet, "Verlet")
-    curtail(axs[1][0], yoshida, "Yoshida")
-    curtail(axs[1][1], rk4, "RK4")
+# charge fichiers
+euler = np.loadtxt('chaos_euler.csv', delimiter=',')
+verlet = np.loadtxt('chaos_verlet.csv', delimiter=',')
+yoshida = np.loadtxt('chaos_yoshida.csv', delimiter=',')
+rk4 = np.loadtxt('chaos_rk4.csv', delimiter=',')
+
+fig, axs = plt.subplots(2, 2, figsize=(14, 14), sharex=True, sharey=True) 
+# curtail pour tronquer les valeurs extremes
+curtail(axs[0][0], euler, "Euler")
+curtail(axs[0][1], verlet, "Verlet")
+curtail(axs[1][0], yoshida, "Yoshida")
+curtail(axs[1][1], rk4, "RK4")
     
-    plt.tight_layout()
-    plt.show()
-
-except Exception as e:
-    print(f"Erreur : {e}")
+plt.tight_layout()
+plt.show()
